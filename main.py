@@ -4,8 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-user = "Seu usuário"
-senha = 'Sua senha'
 valor_aposta = '0,1'
 valor_auto_retirar = '1.1'
 
