@@ -1,2 +1,6 @@
-user = 'Seu usuário'
-senha = 'Sua senha'
+USER = 'Seu usuário'
+SENHA = 'Sua senha'
+TOKEN = 'token do bot telegram'
+CHAT_ID = 'ID do grupo do telegram'
+LINK = '[Clique aqui!](seu link de referência da blaze)'
+API = 'API para receber o resultado das rodadas'
