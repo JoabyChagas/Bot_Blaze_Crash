@@ -1,45 +1,54 @@
 import time
-from setup import user, senha
+from setup import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 valor_aposta = '0,1'
-valor_auto_retirar = '1.1'
+valor_auto_retirar = '2'
 
-def fazer_login():
+def fazer_login(self):
     # apontar o caminho onde será inserido o login e senha do usuário
     caminhoUser = "//input[contains(@name,'username')]"
     caminhoSenha = "//input[@name='password']"
 
     # escrever o login e senha no caminho
-    driver.find_element(By.XPATH, caminhoUser).send_keys(user)
-    driver.find_element(By.XPATH, caminhoSenha).send_keys(senha)
+    self.driver.find_element(By.XPATH, caminhoUser).send_keys(USER)
+    self.driver.find_element(By.XPATH, caminhoSenha).send_keys(SENHA)
 
     # apontar o caminho do botão 'Entrar' e clicar nele
     caminhoEntrar = "//button[normalize-space()='Entrar']"
-    driver.find_element(By.XPATH, caminhoEntrar).click()
+    self.driver.find_element(By.XPATH, caminhoEntrar).click()
 
-def fazer_aposta():
+def fazer_aposta(self):
     # aponta o caminho 'Quantia' e inserir o valor da aposta
     caminhoQuantia = "//input[@type='number']"
-    quantia = driver.find_element(By.XPATH, caminhoQuantia)
-    quantia.send_keys(valor_aposta)
+    quantia = self.driver.find_element(By.XPATH, caminhoQuantia)
+    quantia.send_keys(self.aposta)
 
     # apontar o caminho 'Auto Retirar' e inserir o valor para Sair da aposta
     caminhoAutoRetirar = "//input[@data-testid='auto-cashout']"
-    AutoRetirar = driver.find_element(By.XPATH, caminhoAutoRetirar)
-    AutoRetirar.clear()
-    AutoRetirar.send_keys(valor_auto_retirar)
+    AutoRetirar = self.driver.find_element(By.XPATH, caminhoAutoRetirar)
+    AutoRetirar.send_keys(self.auto_retirar)
 
     # apontar o caminho 'Começar o jogo' e clicar nele
     caminhoComecarJogo = "//button[normalize-space()='Começar o jogo']"
-    driver.find_element(By.XPATH, caminhoComecarJogo).click()
+    self.driver.find_element(By.XPATH, caminhoComecarJogo).click()
 
-def pegar_ultimos_resultados():
+def fazer_martingale(self):
+    # apontar o caminho do botão 2x e clicar nele
+    caminhoMartingale = "//button[@class='grey double']"
+    self.driver.find_element(By.XPATH, caminhoMartingale).click()
+
+    # apontar o caminho 'Começar o jogo' e clicar nele
+    caminhoComecarJogo = "//button[normalize-space()='Começar o jogo']"
+    self.driver.find_element(By.XPATH, caminhoComecarJogo).click()
+
+def ultimos_resultados(self): # Tem outra função e substituí essa 
     # apontar caminho dos ultimos resultados e pegar os elementos
     caminhoUltimosResultados = "//div[@class='entries']"
-    ultimosResultados = driver.find_element(By.XPATH,  caminhoUltimosResultados)
+    ultimosResultados = self.driver.find_element(
+        By.XPATH,  caminhoUltimosResultados)
     # percorrer últimos resultados retorna o resultados e o texto(valores) de cada elemento
     resultados = ultimosResultados.find_elements(By.TAG_NAME, "span")
     valores = [i.text for i in resultados]
